@@ -1,0 +1,41 @@
+    <?xml version="1.0" encoding="UTF-8" ?> 
+    <Module>
+      <ModulePrefs 
+      description="last.fm player"
+      author="Aslak Grinsted" 
+      scrolling="false"
+      category="funandgames" height="266"> 
+      <Require feature="flash" /> 
+      </ModulePrefs> 
+    <Content type="html">
+    <![CDATA[<div id='swfwrapper'></div><div id='message'></div>
+    <script type="text/javascript" language="javascript"> 
+       function myesc(s){
+          var r=escape(s);
+          r=r.replace(/\//gi,'%2F');
+          r=r.replace(/ /gi,'%2520');
+          return r;
+       }
+       var flashvars = {
+        lang: "en", FOD: "true", expanded: "true",
+        autostart: false, lfmMode: "playlist", restype: "url",
+            url: "lastfm://artist/Van Der Phunck/similarartists"
+       };
+       var fv='';
+       for (var prop in flashvars) {
+          if (fv) fv=fv+'&amp;'
+        fv=fv + prop + '=' + myesc(flashvars[prop]);
+       }
+       var params= {
+    wmode: "transparent", bgcolor: "fff", allowFullScreen: "false",
+            allowNetworking: "all", quality: "high", menu: "true", 
+            flashvars: fv
+    };
+    var ok = gadgets.flash.embedFlash('http://cdn.last.fm/webclient/s12n/85/lfmPlayer.swf', 'swfwrapper', 9, params);
+      if (~ok) {
+         document.getElementById('message').innerHTML='Error: Could not embed flash player!';
+      }
+
+    </script>]]> 
+    </Content>
+    </Module>
